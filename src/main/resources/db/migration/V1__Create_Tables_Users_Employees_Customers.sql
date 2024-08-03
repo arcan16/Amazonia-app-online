@@ -1,0 +1,20 @@
+CREATE TABLE users(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    role ENUM('CUSTOMER','EMPLOYEE','SYS') NOT NULL,
+    PRIMARY KEY(id)
+)ENGINE = InnoDB;
+
+CREATE TABLE user_details(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    address VARCHAR(50) NOT NULL,
+    phone VARCHAR(10) NOT NULL UNIQUE,
+    user_id BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_customers_users_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)ENGINE = InnoDB;
+
